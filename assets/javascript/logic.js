@@ -13,6 +13,7 @@ var dataRef = firebase.database();
 var trainName = "";
 var destination = "";
 var firstTime = "00:00";
+var minsAway = 0;
 var tFrequency = 0;
 var currentTime = "";
   
@@ -36,7 +37,12 @@ $("#addTrain").on("click",function(){
 
 dataRef.ref().on("child_added", function (snapshot) {
   var sv = snapshot.val();
-  console.log(sv.trainName)
+  $("#nameCol").text(sv.trainName);
+  $("#destCol").text(sv.destination);
+  $("#freqCol").text(sv.tFrequency);
+  $("#arrivalCol").text();
+  $("#minsAwayCol").text();
+  
 
 
 })
