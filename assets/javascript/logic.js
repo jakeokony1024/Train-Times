@@ -1,32 +1,42 @@
 
 var firebaseConfig = {
-    apiKey: "AIzaSyDUozswkjGtnrxh8C7I33WYtnVO_SfnntI",
-    authDomain: "traintime-4b08a.firebaseapp.com",
-    databaseURL: "https://traintime-4b08a.firebaseio.com",
-    projectId: "traintime-4b08a",
-    storageBucket: "traintime-4b08a.appspot.com",
-    
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+  apiKey: "AIzaSyDpwRmZNNEUU-52OJEdD1XRByJ3dSQygOY",
+  authDomain: "newtraintime.firebaseapp.com",
+  databaseURL: "https://newtraintime.firebaseio.com",
+  projectId: "newtraintime",
+  storageBucket: "newtraintime.appspot.com",
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+var dataRef = firebase.database();
   
-  var database = firebase.database();
-
-  var trainName = "";
-  var destination = "";
-  var firstTime = "00:00";
-  var tFrequency = 0;
-  var currentTime = moment();
+var trainName = "";
+var destination = "";
+var firstTime = "00:00";
+var tFrequency = 0;
+var currentTime = "";
+  
 
 $("#addTrain").on("click",function(){
-    trainName = $("Tname").val.trim();
-    destination = $("#destination").val.trim();
-    firstTime = $("#first").val.trim();
-    tFrequency = $("#frequency").val.trim();
+    event.preventDefault();
+    trainName = $("#Tname").val().trim();
+    destination = $("#destination").val().trim();
+    firstTime = $("#first").val().trim();
+    tFrequency = $("#frequency").val().trim();
+
+    dataRef.ref().push({
+      trainName:trainName,
+      destination:destination,
+      firstTime:firstTime,
+      tFrequency:tFrequency,
+      dateAdded: firebase.database.ServerValue.TIMESTAMP
+    })
 
 })
 
+dataRef.ref().on("child_added", function (snapshot) {
+  var sv = snapshot.val();
+  console.log(sv.trainName)
 
-  
 
-
+})
