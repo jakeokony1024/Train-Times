@@ -35,13 +35,13 @@ $("#addTrain").on("click",function(){
 
 })
 
+
 dataRef.ref().on("child_added", function (snapshot) {
   var sv = snapshot.val();
-  $("#nameCol").text(sv.trainName);
-  $("#destCol").text(sv.destination);
-  $("#freqCol").text(sv.tFrequency);
-  $("#arrivalCol").text();
-  $("#minsAwayCol").text();
+  $(".well").append("<p>"+ sv.trainName + "</p>");
+  $(".well").append("<p>"+ sv.destination + "</p>");
+  $(".well").append("<p>"+ sv.firstTime + "</p>");
+  $(".well").append("<p>"+ sv.tFrequency + "</p>");
   
 
 
